@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Voucher - Fidelya Boutique Hotel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-print-color-adjust: exact;
+        }
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .no-print {
+                display: none;
+            }
+            #itinerary-section {
+                display: block !important;
+            }
+        }
+        .prose h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .prose h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        .prose ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .prose p {
+            margin-bottom: 0.5rem;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #6366f1;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4 md:p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-8 md:p-12">
+                <div class="flex justify-between items-start mb-8 border-b pb-6">
+                    <div>
+                        <h1 class="text-4xl font-bold text-gray-800">Booking Voucher</h1>
+                        <p class="text-gray-600 mt-2">For Visa Application Purposes</p>
+                    </div>
+                    <div class="text-right">
+                        
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                     <p class="text-gray-700">This document confirms the reservation at Fidelya Boutique Hotel for the guest mentioned below. This is a fully paid and non-refundable booking.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 border-b pb-2 mb-3">Guest Information</h3>
+                        <p><strong>Name:</strong> <span id="display-guest-name">john doe</span></p>
+                        <p><strong>Number of Guests:</strong> <span id="display-guest-count">2 Adults</span></p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 border-b pb-2 mb-3">Booking Details</h3>
+                        <p><strong>Booking Reference:</strong> <span id="display-booking-ref">FDL-7B4K9P</span></p>
+                        <p><strong>Booking Date:</strong> <span id="display-booking-date">September 4, 2025</span></p>
+                    </div>
+                     <div>
+                        <h3 class="text-lg font-semibold text-gray-800 border-b pb-2 mb-3">Stay Details</h3>
+                        <p><strong>Check-in Date:</strong> <span id="display-checkin-date">November 1, 2025 (from 14:00)</span></p>
+                        <p><strong>Check-out Date:</strong> <span id="display-checkout-date">November 8, 2025 (until 12:00)</span></p>
+                        <p><strong>Duration:</strong> <span id="display-duration">7 Nights</span></p>
+                    </div>
+                     <div>
+                        <h3 class="text-lg font-semibold text-gray-800 border-b pb-2 mb-3">Accommodation</h3>
+                         <p><strong>Room Type:</strong> <span id="display-room-type">Deluxe Double Room</span></p>
+                         <p><strong>Includes:</strong> <span id="display-room-includes">Free WiFi, Air Conditioning, Private Bathroom</span></p>
+                    </div>
+                </div>
+
+                 <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-gray-800 border-b pb-2 mb-3">Hotel Information</h3>
+                    <p><strong>Hotel Name:</strong> <span id="display-hotel-name">Fidelya Boutique Hotel</span></p>
+                    <p><strong>Address:</strong> <span id="display-hotel-address">Küçük Ayasofya Mah. Pideci sk No: 2 Fatih, Sultanahmet, Istanbul, Turkey</span></p>
+                </div>
+
+
+                <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                     <h3 class="text-lg font-semibold text-gray-800 mb-3">Payment Summary</h3>
+                    <div class="flex justify-between items-center text-gray-600">
+                        <p>Deluxe Double Room (<span id="display-duration-payment">7</span> nights)</p>
+                        <p class="font-semibold">$750.00</p>
+                    </div>
+                    <div class="flex justify-between items-center text-gray-600 mt-2">
+                        <p>Taxes and fees</p>
+                        <p class="font-semibold">$120.00</p>
+                    </div>
+                    <hr class="my-3">
+                    <div class="flex justify-between items-center font-bold text-xl text-gray-900">
+                        <p>Total Paid</p>
+                        <p>$<span id="display-total-paid">870.00</span></p>
+                    </div>
+                    <div class="text-center mt-4 bg-green-100 text-green-800 font-semibold py-2 rounded-lg">
+                        STATUS: PAID IN FULL
+                    </div>
+                </div>
+
+                <div class="border-t pt-8 mt-8">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm text-gray-600">We wish you a pleasant stay!</p>
+                            <p class="text-xs text-gray-400">This is a computer-generated document and does not require a signature unless stamped.</p>
+                        </div>
+                         <div class="w-48 h-24 border-2 border-dashed flex items-center justify-center">
+                            <p class="text-gray-400 text-sm">Official Hotel Stamp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Gemini Itinerary Section -->
+            <div id="itinerary-section" class="p-8 md:p-12 border-t" style="display: none;">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Your Personalized Istanbul Itinerary</h2>
+                <div id="loading-indicator" class="flex justify-center items-center my-8" style="display: none;">
+                    <div class="loader"></div>
+                    <p class="ml-4 text-gray-600">Generating your custom itinerary...</p>
+                </div>
+                <div id="itinerary-content" class="prose max-w-none"></div>
+            </div>
+        </div>
+        <div class="text-center mt-6 no-print">
+            <button id="print-voucher-btn" class="bg-indigo-600 text-white py-3 px-6 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Print for Visa Application
+            </button>
+            <button id="generate-itinerary-btn" class="bg-purple-600 text-white py-3 px-6 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ml-4">
+                ✨ Generate 7-Day Istanbul Itinerary
+            </button>
+            <button id="manual-entry-btn" class="bg-gray-700 text-white py-3 px-6 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4 mt-2">
+                Enter Details Manually
+            </button>
+        </div>
+    </div>
+
+    <!-- Manual Entry Modal -->
+    <div id="manual-entry-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-10 mx-auto p-5 border w-full max-w-2xl shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <h3 class="text-2xl leading-6 font-medium text-gray-900 text-center">Enter Booking Details Manually</h3>
+                <div class="mt-4 px-7 py-3">
+                    <form id="manual-details-form" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                        <!-- Guest Info -->
+                        <div class="md:col-span-2">
+                            <label for="guest-name" class="block text-sm font-medium text-gray-700">Guest Full Name</label>
+                            <input type="text" id="guest-name" value="Mohammad Shuhaib" class="mt-1 block w-full bg-gray-100 p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                        <div>
+                            <label for="guest-count" class="block text-sm font-medium text-gray-700">Number of Guests</label>
+                            <input type="text" id="guest-count" value="2 Adults" class="mt-1 block w-full bg-gray-100 p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                        <div>
+                            <label for="room-type" class="block text-sm font-medium text-gray-700">Room Type</label>
+                            <input type="text" id="room-type" value="Deluxe Double Room" class="mt-1 block w-full bg-gray-100 p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+
+                         <!-- Stay Details -->
+                         <div>
+                            <label for="checkin-date" class="block text-sm font-medium text-gray-700">Check-in Date</label>
+                            <input type="date" id="checkin-date" value="2025-11-01" class="mt-1 block w-full bg-gray-100 p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                        <div>
+                            <label for="checkout-date" class="block text-sm font-medium text-gray-700">Check-out Date</label>
+                            <input type="date" id="checkout-date" value="2025-11-08" class="mt-1 block w-full bg-gray-100 p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+
+                        <!-- Hotel Info -->
+                        <div class="md:col-span-2">
+                             <label for="hotel-name" class="block text-sm font-medium text-gray-700">Hotel Name</label>
+                             <input type="text" id="hotel-name" value="Fidelya Boutique Hotel" class="mt-1 block w-full bg-gray-100 p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                         </div>
+                         <div class="md:col-span-2">
+                            <label for="hotel-address" class="block text-sm font-medium text-gray-700">Hotel Address</label>
+                            <input type="text" id="hotel-address" value="Küçük Ayasofya Mah. Pideci sk No: 2 Fatih, Sultanahmet, Istanbul, Turkey" class="mt-1 block w-full bg-gray-100 p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                         </div>
+
+                        <!-- Payment -->
+                        <div>
+                           <label for="total-paid" class="block text-sm font-medium text-gray-700">Total Paid ($)</label>
+                           <input type="number" step="0.01" id="total-paid" value="870.00" class="mt-1 block w-full bg-gray-100 p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        </div>
+                    </form>
+                </div>
+                <div class="items-center px-4 py-3 text-center">
+                    <button id="update-voucher-btn" class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-auto shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+                        Update Voucher
+                    </button>
+                    <button id="cancel-modal-btn" class="px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md w-auto shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 ml-2">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Gemini API elements
+        const generateBtn = document.getElementById('generate-itinerary-btn');
+// ... existing code ... -->
+        const itineraryContent = document.getElementById('itinerary-content');
+
+        // Manual Entry Modal elements
+        const manualEntryModal = document.getElementById('manual-entry-modal');
+// ... existing code ... -->
+        const cancelModalBtn = document.getElementById('cancel-modal-btn');
+        const updateVoucherBtn = document.getElementById('update-voucher-btn');
